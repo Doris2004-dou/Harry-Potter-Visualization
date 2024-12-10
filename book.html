@@ -39,7 +39,7 @@
             position: relative;
             display: inline-block;
             margin: 15px;
-            width: 23%;
+            width: 18%; /* 调整封面图片的宽度 */
             cursor: pointer;
             transition: transform 0.3s;
         }
@@ -54,12 +54,16 @@
             transform: scale(1.05);
         }
 
-        /* 书籍封面布局 */
+        /* 书籍封面布局：第一行3本，第二行4本 */
         .book-row {
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
             margin-bottom: 30px;
+        }
+
+        .book-row:nth-child(1) {
+            justify-content: space-between; /* 第一行3本书，稍微增大间距 */
         }
 
         /* 情感分析图 */
@@ -82,7 +86,9 @@
             padding: 10px;
             position: fixed;
             bottom: 0;
-            width: 100%;
+            width: 50%; /* 让页脚宽度为50% */
+            left: 50%;
+            transform: translateX(-50%); /* 将页脚居中 */
         }
 
     </style>
@@ -110,14 +116,14 @@
                 <img src="b3.jpg" alt="Book 3 Cover">
             </a>
         </div>
+    </div>
+
+    <div class="book-row">
         <div class="book-cover">
             <a href="4.html">
                 <img src="b4.jpg" alt="Book 4 Cover">
             </a>
         </div>
-    </div>
-
-    <div class="book-row">
         <div class="book-cover">
             <a href="5.html">
                 <img src="b5.jpg" alt="Book 5 Cover">
