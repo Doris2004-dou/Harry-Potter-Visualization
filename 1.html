@@ -11,8 +11,8 @@
         }
 
         body {
-            background-color: black;
-            color: white;
+            background-color: white;
+            color: black;
             font-family: "Harry Potter", sans-serif;
             margin: 0;
             padding: 0;
@@ -22,6 +22,7 @@
             text-align: center;
             font-size: 4rem;
             margin-top: 50px;
+            color: black;
         }
 
         .content {
@@ -31,20 +32,25 @@
         }
 
         .content img {
-            width: 45%;
             height: auto;
             margin: 0 20px;
         }
 
+        .content .left {
+            width: 40%; /* Left image smaller */
+        }
+
+        .content .right {
+            width: 55%; /* Right image larger */
+        }
+
         footer {
-            color: white;
+            color: black;
             text-align: center;
             padding: 10px;
             position: fixed;
             bottom: 0;
-            width: 50%;
-            left: 50%;
-            transform: translateX(-50%);
+            width: 100%;
         }
     </style>
 </head>
@@ -53,8 +59,8 @@
     <h1>Harry Potter and the Philosopher's Stone</h1>
 
     <div class="content">
-        <img src="1.png" alt="Sentiment Trend">
-        <img src="s1.png" alt="Sentiment Analysis">
+        <img class="left" src="1.png" alt="Sentiment Trend">
+        <img class="right" src="s1.png" alt="Sentiment Analysis">
     </div>
 
     <footer>
