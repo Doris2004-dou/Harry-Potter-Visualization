@@ -19,19 +19,30 @@
             padding: 0;
             overflow-x: hidden;
         }
-        .container {
+
+        /* 背景图片容器 */
+        .background-container {
+            position: relative;
             width: 100%;
-            padding: 20px;
+            height: 100vh;
+            background-image: url('your_magic_world_image.jpg');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
+        /* 标题 */
         h1 {
             text-align: center;
             font-family: "Harry Potter", sans-serif;
             color: white;
             font-size: 11rem;
             margin: 0;
+            z-index: 1;  /* 确保标题在按键上方 */
         }
 
+        /* 副标题 */
         h2 {
             text-align: center;
             font-family: "Harry Potter", sans-serif;
@@ -39,11 +50,13 @@
             font-size: 1.5rem;
             text-shadow: 3px 3px 5px rgba(255, 255, 255, 0.7);
             margin: 20px 0;
+            z-index: 1;  /* 确保副标题在按键上方 */
         }
 
+        /* 按钮样式 */
         .buttons {
             text-align: center;
-            margin-top: 50px;
+            z-index: 1;  /* 确保按钮在副标题下方 */
         }
 
         .button {
@@ -78,17 +91,17 @@
 </head>
 <body>
 
-<!-- 首页：魔法世界背景和大标题 -->
-<div class="container">
-    <div style="background-image: url('your_magic_world_image.jpg'); height: 100vh; background-size: cover; display: flex; justify-content: center; align-items: center;">
+<!-- 背景图区域 -->
+<div class="background-container">
+    <div style="text-align: center; z-index: 1; position: relative;">
         <h1>Harry Potter</h1>
-    </div>
-    <h2>Welcome Back To The Wizarding World!</h2>
+        <h2>Welcome Back To The Wizarding World!</h2>
 
-    <!-- 按钮区域 -->
-    <div class="buttons">
-        <a href="movie.html" class="button">Movie Collection</a>
-        <a href="book.html" class="button">Book Collection</a>
+        <!-- 按钮区域 -->
+        <div class="buttons">
+            <a href="movie.html" class="button">Movie Collection</a>
+            <a href="book.html" class="button">Book Collection</a>
+        </div>
     </div>
 </div>
 
