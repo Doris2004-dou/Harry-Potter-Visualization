@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book 1</title>
+    <style>
+        @font-face {
+            font-family: "Harry Potter";
+            src: url("hp.ttf") format("truetype");
+        }
+
+        body {
+            background-color: black;
+            color: white;
+            font-family: "Harry Potter", sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 4rem;
+            margin-top: 50px;
+        }
+
+        .content {
+            display: flex;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .content img {
+            width: 45%;
+            margin: 0 20px;
+        }
+
+        footer {
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Book 1 Title</h1>
+
+    <div class="content">
+        <img src="1.png" alt="Sentiment Trend">
+        <img src="s1.png" alt="Sentiment Analysis">
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Doris</p>
+    </footer>
+
+</body>
+</html>
