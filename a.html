@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harry Potter Movie Collection</title>
     <style>
+        @font-face {
+            font-family: "Harry Potter";
+            src: url('hp.ttf') format('truetype');
+        }
         body {
             background-color: black;
             color: white;
@@ -17,33 +21,17 @@
             width: 100%;
             padding: 20px;
         }
-        /* 导入哈利波特字体 */
-        @font-face {
-            font-family: "Harry Potter Font";
-            src: url('hp.ttf') format('truetype');
-        }
-        /* 首页大标题 */
         h1 {
             text-align: center;
-            font-size: 35vw; /* 设置为页面的40% */
-            font-family: "Harry Potter Font", sans-serif;
+            font-size: 13rem;
+            font-family: "Harry Potter", sans-serif;
             color: white;
-            margin-top: 20vh;
         }
-        /* 首页的小字 */
         h2 {
             text-align: center;
             font-size: 1.5rem;
             color: white;
-            text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.7);
-        }
-        /* 其他页面的标题 */
-        .page-title {
-            text-align: center;
-            font-family: "Harry Potter Font", sans-serif;
-            font-size: 3rem; /* 更小的标题 */
-            color: white;
-            margin-top: 20px;
+            text-shadow: 3px 3px 5px rgba(255, 255, 255, 0.7);
         }
         .movie {
             position: relative;
@@ -120,11 +108,8 @@
 
 <!-- 电影集合 -->
 <div class="container">
-    <div class="page-title">
-        <h1>MOVIE COLLECTION</h1>
-    </div>
-    <!-- 上面四个海报 -->
-    <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+    <h1>MOVIE COLLECTION</h1>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center;">
         <div class="movie">
             <img src="Harry_Potter_and_the_Philosopher's_Stone.jpg" alt="Harry Potter and the Philosopher's Stone">
             <div class="movie-info">
@@ -157,10 +142,6 @@
                 <p>Director: Mike Newell</p>
             </div>
         </div>
-    </div>
-    
-    <!-- 下面四个海报 -->
-    <div style="display: flex; justify-content: center; flex-wrap: wrap;">
         <div class="movie">
             <img src="Harry_Potter_and_the_Order_of_the_Phoenix.jpg" alt="Harry Potter and the Order of the Phoenix">
             <div class="movie-info">
@@ -196,19 +177,89 @@
     </div>
 </div>
 
-<!-- 电影预算和票房 -->
+<!-- 电影预算、票房、发行年份表格 -->
+<div class="container">
+    <h1>Movie Information</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Movie</th>
+                <th>Release Year</th>
+                <th>Runtime</th>
+                <th>Budget ($)</th>
+                <th>Box Office ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Philosopher's Stone</td>
+                <td>2001</td>
+                <td>152 mins</td>
+                <td>125,000,000</td>
+                <td>970,000,000</td>
+            </tr>
+            <tr>
+                <td>Chamber of Secrets</td>
+                <td>2002</td>
+                <td>161 mins</td>
+                <td>100,000,000</td>
+                <td>880,000,000</td>
+            </tr>
+            <tr>
+                <td>Prisoner of Azkaban</td>
+                <td>2004</td>
+                <td>142 mins</td>
+                <td>130,000,000</td>
+                <td>790,000,000</td>
+            </tr>
+            <tr>
+                <td>Goblet of Fire</td>
+                <td>2005</td>
+                <td>157 mins</td>
+                <td>150,000,000</td>
+                <td>896,000,000</td>
+            </tr>
+            <tr>
+                <td>Order of the Phoenix</td>
+                <td>2007</td>
+                <td>138 mins</td>
+                <td>250,000,000</td>
+                <td>940,000,000</td>
+            </tr>
+            <tr>
+                <td>Half-Blood Prince</td>
+                <td>2009</td>
+                <td>153 mins</td>
+                <td>250,000,000</td>
+                <td>930,000,000</td>
+            </tr>
+            <tr>
+                <td>Deathly Hallows Part 1</td>
+                <td>2010</td>
+                <td>146 mins</td>
+                <td>250,000,000</td>
+                <td>1340,000,000</td>
+            </tr>
+            <tr>
+                <td>Deathly Hallows Part 2</td>
+                <td>2011</td>
+                <td>130 mins</td>
+                <td>250,000,000</td>
+                <td>1340,000,000</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- 电影预算和票房柱状图 -->
 <div class="chart-container">
-    <div class="page-title">
-        <h1>Movie Budget and Revenue</h1>
-    </div>
+    <h1>Movie Budget and Revenue</h1>
     <img src="budget_revenue_trends.png" alt="Budget and Revenue Trend" style="width: 80%; height: auto; margin: 0 auto;">
 </div>
 
 <!-- 电影评分折线图 -->
 <div class="chart-container">
-    <div class="page-title">
-        <h1>Movie Ratings</h1>
-    </div>
+    <h1>Movie Ratings</h1>
     <img src="rating_trend.png" alt="Ratings Trend" style="width: 80%; height: auto; margin: 0 auto;">
 </div>
 
