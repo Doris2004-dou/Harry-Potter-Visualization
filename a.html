@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harry Potter Movie Collection</title>
+    <title>Harry Potter</title>
     <style>
+        /* 引入自定义字体 */
+        @font-face {
+            font-family: "Harry Potter";
+            src: url("hp.ttf") format("truetype");
+        }
+
         body {
             background-color: black;
             color: white;
@@ -17,39 +23,47 @@
             width: 100%;
             padding: 20px;
         }
+
         h1 {
             text-align: center;
-            font-size: 13rem;
             font-family: "Harry Potter", sans-serif;
             color: white;
+            font-size: 11rem;
+            margin: 0;
         }
-        .sub-title {
+
+        h2 {
             text-align: center;
-            font-size: 1.5rem;
-            font-family: "Arial", sans-serif;
+            font-family: "Harry Potter", sans-serif;
             color: white;
-            text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.7);
+            font-size: 1.5rem;
+            text-shadow: 3px 3px 5px rgba(255, 255, 255, 0.7);
+            margin: 20px 0;
         }
-        .button-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
+
+        .buttons {
+            text-align: center;
+            margin-top: 50px;
         }
+
         .button {
             background-color: #444;
             color: white;
-            padding: 15px 30px;
-            font-size: 1.5rem;
-            margin: 0 10px;
-            text-align: center;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            font-family: "Harry Potter", sans-serif;
+            font-size: 2.5rem;
+            padding: 15px 40px;
+            margin: 20px;
             text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background-color 0.3s;
         }
+
         .button:hover {
-            background-color: #666;
+            background-color: #fff;
+            color: black;
         }
+
         footer {
             background-color: #333;
             color: white;
@@ -59,6 +73,7 @@
             bottom: 0;
             width: 100%;
         }
+
     </style>
 </head>
 <body>
@@ -68,10 +83,10 @@
     <div style="background-image: url('your_magic_world_image.jpg'); height: 100vh; background-size: cover; display: flex; justify-content: center; align-items: center;">
         <h1>Harry Potter</h1>
     </div>
-    <div class="sub-title">
-        <p>Welcome Back To The Wizarding World!</p>
-    </div>
-    <div class="button-container">
+    <h2>Welcome Back To The Wizarding World!</h2>
+
+    <!-- 按钮区域 -->
+    <div class="buttons">
         <a href="movie.html" class="button">Movie Collection</a>
         <a href="book.html" class="button">Book Collection</a>
     </div>
