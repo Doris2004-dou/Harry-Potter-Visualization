@@ -22,19 +22,28 @@
             font-family: "Harry Potter Font";
             src: url('hp.ttf') format('truetype');
         }
+        /* 首页大标题 */
         h1 {
             text-align: center;
-            font-size: 14rem;  /* 调整Harry Potter标题的大小，增大字体 */
+            font-size: 35vw; /* 设置为页面的40% */
             font-family: "Harry Potter Font", sans-serif;
-            color: gold;  /* 金色 */
-            text-shadow: 2px 2px 8px rgba(255, 215, 0, 0.8), 0 0 25px rgba(255, 215, 0, 0.8); /* 金属感的光效 */
+            color: white;
             margin-top: 20vh;
         }
+        /* 首页的小字 */
         h2 {
             text-align: center;
-            font-size: 2rem;  /* 保持较小的字体大小 */
+            font-size: 1.5rem;
             color: white;
             text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.7);
+        }
+        /* 其他页面的标题 */
+        .page-title {
+            text-align: center;
+            font-family: "Harry Potter Font", sans-serif;
+            font-size: 3rem; /* 更小的标题 */
+            color: white;
+            margin-top: 20px;
         }
         .movie {
             position: relative;
@@ -111,7 +120,9 @@
 
 <!-- 电影集合 -->
 <div class="container">
-    <h1>MOVIE COLLECTION</h1>
+    <div class="page-title">
+        <h1>MOVIE COLLECTION</h1>
+    </div>
     <!-- 上面四个海报 -->
     <div style="display: flex; justify-content: center; flex-wrap: wrap;">
         <div class="movie">
@@ -187,13 +198,17 @@
 
 <!-- 电影预算和票房 -->
 <div class="chart-container">
-    <h1>Movie Budget and Revenue</h1>
+    <div class="page-title">
+        <h1>Movie Budget and Revenue</h1>
+    </div>
     <img src="budget_revenue_trends.png" alt="Budget and Revenue Trend" style="width: 80%; height: auto; margin: 0 auto;">
 </div>
 
 <!-- 电影评分折线图 -->
 <div class="chart-container">
-    <h1>Movie Ratings</h1>
+    <div class="page-title">
+        <h1>Movie Ratings</h1>
+    </div>
     <img src="rating_trend.png" alt="Ratings Trend" style="width: 80%; height: auto; margin: 0 auto;">
 </div>
 
