@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harry Potter Movie Collection</title>
     <style>
-        @font-face {
-            font-family: "Harry Potter";
-            src: url('hp.ttf') format('truetype');
-        }
         body {
             background-color: black;
             color: white;
@@ -27,51 +23,32 @@
             font-family: "Harry Potter", sans-serif;
             color: white;
         }
-        h2 {
+        .sub-title {
             text-align: center;
             font-size: 1.5rem;
+            font-family: "Arial", sans-serif;
             color: white;
-            text-shadow: 3px 3px 5px rgba(255, 255, 255, 0.7);
+            text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.7);
         }
-        .movie {
-            position: relative;
-            display: inline-block;
-            margin: 10px;
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
         }
-        .movie img {
-            width: 200px;
-            height: 300px;
-            transition: transform 0.3s;
+        .button {
+            background-color: #444;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            text-align: center;
+            border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
         }
-        .movie:hover img {
-            transform: scale(1.1);
-        }
-        .movie-info {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px;
-            width: 100%;
-            text-align: center;
-        }
-        .movie:hover .movie-info {
-            display: block;
-        }
-        .chart-container {
-            margin-top: 50px;
-            text-align: center;
-        }
-        .bar-chart {
-            width: 80%;
-            margin: 0 auto;
-        }
-        canvas {
-            display: block;
-            margin: 0 auto;
+        .button:hover {
+            background-color: #666;
         }
         footer {
             background-color: #333;
@@ -82,185 +59,22 @@
             bottom: 0;
             width: 100%;
         }
-        table {
-            width: 80%;
-            margin: 30px auto;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid white;
-            padding: 10px;
-        }
-        th {
-            text-align: left;
-        }
     </style>
 </head>
 <body>
 
 <!-- 首页：魔法世界背景和大标题 -->
 <div class="container">
-    <div style="background-image: url('your_magic_world_image.jpg'); height: 100vh; background-size: cover; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+    <div style="background-image: url('your_magic_world_image.jpg'); height: 100vh; background-size: cover; display: flex; justify-content: center; align-items: center;">
         <h1>Harry Potter</h1>
-        <h2>Welcome Back To The Wizarding World!</h2>
     </div>
-</div>
-
-<!-- 电影集合 -->
-<div class="container">
-    <h1>MOVIE COLLECTION</h1>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-        <div class="movie">
-            <img src="Harry_Potter_and_the_Philosopher's_Stone.jpg" alt="Harry Potter and the Philosopher's Stone">
-            <div class="movie-info">
-                <p>Release Year: 2001</p>
-                <p>Runtime: 152 mins</p>
-                <p>Director: Chris Columbus</p>
-            </div>
-        </div>
-        <div class="movie">
-            <img src="Harry_Potter_and_the_Chamber_of_Secrets.jpg" alt="Harry Potter and the Chamber of Secrets">
-            <div class="movie-info">
-                <p>Release Year: 2002</p>
-                <p>Runtime: 161 mins</p>
-                <p>Director: Chris Columbus</p>
-            </div>
-        </div>
-        <div class="movie">
-            <img src="Harry_Potter_and_the_Prisoner_of_Azkaban.jpg" alt="Harry Potter and the Prisoner of Azkaban">
-            <div class="movie-info">
-                <p>Release Year: 2004</p>
-                <p>Runtime: 142 mins</p>
-                <p>Director: Alfonso Cuarón</p>
-            </div>
-        </div>
-        <div class="movie">
-            <img src="Harry_Potter_and_the_Goblet_of_Fire.jpg" alt="Harry Potter and the Goblet of Fire">
-            <div class="movie-info">
-                <p>Release Year: 2005</p>
-                <p>Runtime: 157 mins</p>
-                <p>Director: Mike Newell</p>
-            </div>
-        </div>
-        <div class="movie">
-            <img src="Harry_Potter_and_the_Order_of_the_Phoenix.jpg" alt="Harry Potter and the Order of the Phoenix">
-            <div class="movie-info">
-                <p>Release Year: 2007</p>
-                <p>Runtime: 138 mins</p>
-                <p>Director: David Yates</p>
-            </div>
-        </div>
-        <div class="movie">
-            <img src="Harry_Potter_and_the_Half-Blood_Prince.jpg" alt="Harry Potter and the Half-Blood Prince">
-            <div class="movie-info">
-                <p>Release Year: 2009</p>
-                <p>Runtime: 153 mins</p>
-                <p>Director: David Yates</p>
-            </div>
-        </div>
-        <div class="movie">
-            <img src="Harry_Potter_and_the_Deathly_Hallows_-_Part_1.jpg" alt="Harry Potter and the Deathly Hallows Part 1">
-            <div class="movie-info">
-                <p>Release Year: 2010</p>
-                <p>Runtime: 146 mins</p>
-                <p>Director: David Yates</p>
-            </div>
-        </div>
-        <div class="movie">
-            <img src="Harry_Potter_and_the_Deathly_Hallows_-_Part_2.jpg" alt="Harry Potter and the Deathly Hallows Part 2">
-            <div class="movie-info">
-                <p>Release Year: 2011</p>
-                <p>Runtime: 130 mins</p>
-                <p>Director: David Yates</p>
-            </div>
-        </div>
+    <div class="sub-title">
+        <p>Welcome Back To The Wizarding World!</p>
     </div>
-</div>
-
-<!-- 电影预算、票房、发行年份表格 -->
-<div class="container">
-    <h1>Movie Information</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Movie</th>
-                <th>Release Year</th>
-                <th>Runtime</th>
-                <th>Budget ($)</th>
-                <th>Box Office ($)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Philosopher's Stone</td>
-                <td>2001</td>
-                <td>152 mins</td>
-                <td>125,000,000</td>
-                <td>970,000,000</td>
-            </tr>
-            <tr>
-                <td>Chamber of Secrets</td>
-                <td>2002</td>
-                <td>161 mins</td>
-                <td>100,000,000</td>
-                <td>880,000,000</td>
-            </tr>
-            <tr>
-                <td>Prisoner of Azkaban</td>
-                <td>2004</td>
-                <td>142 mins</td>
-                <td>130,000,000</td>
-                <td>790,000,000</td>
-            </tr>
-            <tr>
-                <td>Goblet of Fire</td>
-                <td>2005</td>
-                <td>157 mins</td>
-                <td>150,000,000</td>
-                <td>896,000,000</td>
-            </tr>
-            <tr>
-                <td>Order of the Phoenix</td>
-                <td>2007</td>
-                <td>138 mins</td>
-                <td>250,000,000</td>
-                <td>940,000,000</td>
-            </tr>
-            <tr>
-                <td>Half-Blood Prince</td>
-                <td>2009</td>
-                <td>153 mins</td>
-                <td>250,000,000</td>
-                <td>930,000,000</td>
-            </tr>
-            <tr>
-                <td>Deathly Hallows Part 1</td>
-                <td>2010</td>
-                <td>146 mins</td>
-                <td>250,000,000</td>
-                <td>1340,000,000</td>
-            </tr>
-            <tr>
-                <td>Deathly Hallows Part 2</td>
-                <td>2011</td>
-                <td>130 mins</td>
-                <td>250,000,000</td>
-                <td>1340,000,000</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<!-- 电影预算和票房柱状图 -->
-<div class="chart-container">
-    <h1>Movie Budget and Revenue</h1>
-    <img src="budget_revenue_trends.png" alt="Budget and Revenue Trend" style="width: 80%; height: auto; margin: 0 auto;">
-</div>
-
-<!-- 电影评分折线图 -->
-<div class="chart-container">
-    <h1>Movie Ratings</h1>
-    <img src="rating_trend.png" alt="Ratings Trend" style="width: 80%; height: auto; margin: 0 auto;">
+    <div class="button-container">
+        <a href="movie.html" class="button">Movie Collection</a>
+        <a href="book.html" class="button">Book Collection</a>
+    </div>
 </div>
 
 <!-- 页脚 -->
