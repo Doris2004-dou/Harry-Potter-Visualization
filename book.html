@@ -72,6 +72,18 @@
             display: block;
         }
 
+        .trend-line {
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        canvas {
+            background-color: white;
+            display: block;
+            margin: 0 auto;
+            border-radius: 10px;
+        }
+
         footer {
             color: white;
             text-align: center;
@@ -143,6 +155,11 @@
     <p>This is the content of book 7. Replace this with the actual content of 7.html.</p>
 </div>
 
+<!-- 情感趋势折线图 -->
+<div class="trend-line">
+    <canvas id="sentimentCanvas" width="800" height="400"></canvas>
+</div>
+
 <!-- 页脚 -->
 <footer>
     <p>&copy; 2024 Doris</p>
@@ -159,6 +176,32 @@
         const contents = document.querySelectorAll(".book-content");
         contents.forEach(content => content.classList.remove("visible"));
     }
+
+    // 绘制情感趋势折线图
+    const canvas = document.getElementById("sentimentCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const sentimentData = [
+        0.2, 0.4, 0.6, 0.5, 0.7, 0.3, 0.5
+    ]; // 示例数据，每本书对应一个情感得分
+
+    const canvasWidth = canvas.width;
+    const canvasHeight = canvas.height;
+    const bookCount = sentimentData.length;
+    const segmentWidth = canvasWidth / bookCount;
+
+    ctx.beginPath();
+    ctx.moveTo(0, canvasHeight - sentimentData[0] * canvasHeight);
+
+    sentimentData.forEach((value, index) => {
+        const x = index * segmentWidth;
+        const y = canvasHeight - value * canvasHeight;
+        ctx.lineTo(x, y);
+    });
+
+    ctx.strokeStyle = "blue";
+    ctx.lineWidth = 2;
+    ctx.stroke();
 </script>
 
 </body>
