@@ -12,8 +12,8 @@
         }
 
         body {
-            background-color: black;
-            color: white;
+            background-color: white;
+            color: black;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -25,37 +25,29 @@
             text-align: center;
             font-family: "Harry Potter", sans-serif;
             font-size: 4rem;
-            color: white;
+            color: black;
             margin-bottom: 30px;
         }
 
         /* 书籍封面样式 */
         .book-collection {
             display: flex;
-            justify-content: space-around;
+            justify-content: center;
             align-items: center;
-            margin: 30px auto;
+            margin: 0 auto;
             flex-wrap: nowrap;
             overflow-x: auto;
             padding: 20px;
         }
 
         .book-cover {
-            position: relative;
-            margin: 0 10px;
-            cursor: pointer;
-            transition: transform 0.3s;
+            margin: 0;
+            flex: 1 1 auto;
         }
 
         .book-cover img {
-            width: calc(100% / 7); /* 每本书分配宽度 */
+            width: 150px;
             height: auto;
-        }
-
-        }
-
-        .book-cover:hover img {
-            transform: scale(1.1);
         }
 
         /* 动态内容展示 */
@@ -63,10 +55,10 @@
             text-align: center;
             margin-top: 20px;
             font-size: 1rem;
-            color: white;
+            color: black;
             min-height: 300px;
             padding: 20px;
-            border: 1px solid white;
+            border: 1px solid black;
             display: none;
         }
 
@@ -77,17 +69,20 @@
         .trend-line {
             margin: 20px auto;
             text-align: center;
-        }
-
-        canvas {
-            background-color: white;
-            display: block;
-            margin: 0 auto;
+            position: relative;
+            width: calc(150px * 7); /* 七本书封面宽度总和 */
+            height: 400px;
+            background-color: black;
             border-radius: 10px;
         }
 
+        canvas {
+            display: block;
+            margin: 0 auto;
+        }
+
         footer {
-            color: white;
+            color: black;
             text-align: center;
             padding: 10px;
             position: fixed;
@@ -104,62 +99,32 @@
 
 <!-- 书籍封面展示 -->
 <div class="book-collection">
-    <div class="book-cover" onmouseover="showContent(1)" onmouseout="hideContent()">
+    <div class="book-cover">
         <img src="b1.jpg" alt="Book 1 Cover">
     </div>
-    <div class="book-cover" onmouseover="showContent(2)" onmouseout="hideContent()">
+    <div class="book-cover">
         <img src="b2.jpg" alt="Book 2 Cover">
     </div>
-    <div class="book-cover" onmouseover="showContent(3)" onmouseout="hideContent()">
+    <div class="book-cover">
         <img src="b3.jpg" alt="Book 3 Cover">
     </div>
-    <div class="book-cover" onmouseover="showContent(4)" onmouseout="hideContent()">
+    <div class="book-cover">
         <img src="b4.jpg" alt="Book 4 Cover">
     </div>
-    <div class="book-cover" onmouseover="showContent(5)" onmouseout="hideContent()">
+    <div class="book-cover">
         <img src="b5.jpg" alt="Book 5 Cover">
     </div>
-    <div class="book-cover" onmouseover="showContent(6)" onmouseout="hideContent()">
+    <div class="book-cover">
         <img src="b6.jpg" alt="Book 6 Cover">
     </div>
-    <div class="book-cover" onmouseover="showContent(7)" onmouseout="hideContent()">
+    <div class="book-cover">
         <img src="b7.jpg" alt="Book 7 Cover">
     </div>
 </div>
 
-<!-- 动态展示书本内容 -->
-<div class="book-content" id="content-1">
-    <h2>Harry Potter and the Philosopher's Stone</h2>
-    <p>This is the content of book 1. Replace this with the actual content of 1.html.</p>
-</div>
-<div class="book-content" id="content-2">
-    <h2>Harry Potter and the Chamber of Secrets</h2>
-    <p>This is the content of book 2. Replace this with the actual content of 2.html.</p>
-</div>
-<div class="book-content" id="content-3">
-    <h2>Harry Potter and the Prisoner of Azkaban</h2>
-    <p>This is the content of book 3. Replace this with the actual content of 3.html.</p>
-</div>
-<div class="book-content" id="content-4">
-    <h2>Harry Potter and the Goblet of Fire</h2>
-    <p>This is the content of book 4. Replace this with the actual content of 4.html.</p>
-</div>
-<div class="book-content" id="content-5">
-    <h2>Harry Potter and the Order of the Phoenix</h2>
-    <p>This is the content of book 5. Replace this with the actual content of 5.html.</p>
-</div>
-<div class="book-content" id="content-6">
-    <h2>Harry Potter and the Half-Blood Prince</h2>
-    <p>This is the content of book 6. Replace this with the actual content of 6.html.</p>
-</div>
-<div class="book-content" id="content-7">
-    <h2>Harry Potter and the Deathly Hallows</h2>
-    <p>This is the content of book 7. Replace this with the actual content of 7.html.</p>
-</div>
-
 <!-- 情感趋势折线图 -->
 <div class="trend-line">
-    <canvas id="sentimentCanvas" width="800" height="400"></canvas>
+    <canvas id="sentimentCanvas" width="1050" height="400"></canvas> <!-- 宽度为 7 * 150px -->
 </div>
 
 <!-- 页脚 -->
@@ -172,49 +137,33 @@
     const canvas = document.getElementById("sentimentCanvas");
     const ctx = canvas.getContext("2d");
 
-    // 示例情感数据：按章节分布（这里需替换为 105 个章节的真实数据）
     const sentimentData = [
-        0.1, -0.2, 0.3, 0.5, -0.4, 0.2, -0.1, 0.6, 0.3, 0.1, -0.2, 0.0, 0.4, 0.2, -0.1,
-        0.3, 0.2, -0.3, 0.4, 0.5, -0.6, 0.1, 0.0, -0.4, 0.2, 0.1, -0.5, 0.6, 0.4, 0.2,
-        0.5, -0.2, 0.3, -0.1, 0.6, 0.2, -0.4, 0.3, 0.2, 0.1, -0.3, 0.0, 0.4, -0.5, 0.2,
-        -0.1, 0.3, 0.2, 0.4, -0.2, -0.1, 0.6, 0.4, 0.2, 0.1, -0.5, 0.3, -0.1, 0.6, 0.2,
-        0.1, -0.4, 0.5, 0.3, 0.2, -0.6, 0.1, 0.0, -0.4, 0.3, 0.2, 0.5, -0.1, 0.4, -0.2,
-        0.3, -0.1, 0.5, 0.6, -0.4, 0.3, -0.2, 0.0, 0.4, -0.5, 0.2, 0.3, 0.1, -0.2, 0.0,
-        0.6, 0.5, 0.4, -0.3, 0.2, 0.1, 0.5, 0.4, 0.2, -0.1, 0.3
-    ];
+        0.2, 0.4, 0.6, 0.5, 0.7, 0.3, 0.5
+    ]; // 示例数据，每本书对应一个情感得分
 
     const canvasWidth = canvas.width;
     const canvasHeight = canvas.height;
-    const chapterCount = sentimentData.length;
-    const books = 7; // 7本书
-    const chaptersPerBook = Math.floor(chapterCount / books);
+    const bookCount = sentimentData.length;
+    const segmentWidth = canvasWidth / bookCount;
 
-    // 设置每本书的宽度和每章节的宽度
-    const bookWidth = canvasWidth / books;
-    const chapterWidth = canvasWidth / chapterCount;
+    // 设置背景色为黑色
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-    const yMin = -1; // 情感最低值
-    const yMax = 1;  // 情感最高值
-
-    // 映射情感分数到画布高度
-    const mapToCanvasY = (value) => canvasHeight - ((value - yMin) / (yMax - yMin)) * canvasHeight;
-
-    // 绘制折线图
+    // 绘制折线
     ctx.beginPath();
-    ctx.moveTo(0, mapToCanvasY(sentimentData[0])); // 初始点
+    ctx.moveTo(0, canvasHeight - sentimentData[0] * canvasHeight);
 
     sentimentData.forEach((value, index) => {
-        const x = index * chapterWidth;
-        const y = mapToCanvasY(value);
+        const x = index * segmentWidth + segmentWidth / 2;
+        const y = canvasHeight - value * canvasHeight;
         ctx.lineTo(x, y);
     });
 
-    ctx.strokeStyle = "white"; // 白色折线
+    ctx.strokeStyle = "white";
     ctx.lineWidth = 2;
     ctx.stroke();
 </script>
-
-
 
 </body>
 </html>
