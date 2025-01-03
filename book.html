@@ -48,8 +48,10 @@
         }
 
         .book-cover img {
-            width: 150px;
+            width: calc(100% / 7); /* 每本书分配宽度 */
             height: auto;
+        }
+
         }
 
         .book-cover:hover img {
@@ -170,7 +172,7 @@
     const canvas = document.getElementById("sentimentCanvas");
     const ctx = canvas.getContext("2d");
 
-    // 示例情感数据：105 个章节的情感分数
+    // 示例情感数据：按章节分布（这里需替换为 105 个章节的真实数据）
     const sentimentData = [
         0.1, -0.2, 0.3, 0.5, -0.4, 0.2, -0.1, 0.6, 0.3, 0.1, -0.2, 0.0, 0.4, 0.2, -0.1,
         0.3, 0.2, -0.3, 0.4, 0.5, -0.6, 0.1, 0.0, -0.4, 0.2, 0.1, -0.5, 0.6, 0.4, 0.2,
@@ -183,35 +185,35 @@
 
     const canvasWidth = canvas.width;
     const canvasHeight = canvas.height;
-
     const chapterCount = sentimentData.length;
+    const books = 7; // 7本书
+    const chaptersPerBook = Math.floor(chapterCount / books);
+
+    // 设置每本书的宽度和每章节的宽度
+    const bookWidth = canvasWidth / books;
     const chapterWidth = canvasWidth / chapterCount;
 
-    // 设置纵坐标范围 (-1 到 1)
-    const yMin = -1;
-    const yMax = 1;
+    const yMin = -1; // 情感最低值
+    const yMax = 1;  // 情感最高值
 
     // 映射情感分数到画布高度
-    const mapToCanvasY = (value) => {
-        return canvasHeight - ((value - yMin) / (yMax - yMin)) * canvasHeight;
-    };
+    const mapToCanvasY = (value) => canvasHeight - ((value - yMin) / (yMax - yMin)) * canvasHeight;
 
+    // 绘制折线图
     ctx.beginPath();
+    ctx.moveTo(0, mapToCanvasY(sentimentData[0])); // 初始点
 
     sentimentData.forEach((value, index) => {
         const x = index * chapterWidth;
         const y = mapToCanvasY(value);
-        if (index === 0) {
-            ctx.moveTo(x, y);
-        } else {
-            ctx.lineTo(x, y);
-        }
+        ctx.lineTo(x, y);
     });
 
-    ctx.strokeStyle = "blue";
+    ctx.strokeStyle = "white"; // 白色折线
     ctx.lineWidth = 2;
     ctx.stroke();
 </script>
+
 
 
 </body>
