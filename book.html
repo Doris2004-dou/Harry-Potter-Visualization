@@ -166,43 +166,68 @@
 </footer>
 
 <script>
-    function showContent(bookIndex) {
-        hideContent(); // 隐藏所有内容
-        const contentElement = document.getElementById(`content-${bookIndex}`);
-        contentElement.classList.add("visible");
-    }
-
-    function hideContent() {
-        const contents = document.querySelectorAll(".book-content");
-        contents.forEach(content => content.classList.remove("visible"));
-    }
-
     // 绘制情感趋势折线图
     const canvas = document.getElementById("sentimentCanvas");
     const ctx = canvas.getContext("2d");
 
+    // 示例情感数据，每本书的章节情感分数
     const sentimentData = [
-        0.2, 0.4, 0.6, 0.5, 0.7, 0.3, 0.5
-    ]; // 示例数据，每本书对应一个情感得分
+        [0.1, 0.2, 0.3, 0.4, 0.5], // Book 1
+        [0.2, 0.3, 0.1, 0.2, 0.3], // Book 2
+        [0.4, 0.5, 0.3, 0.6, 0.7], // Book 3
+        [0.3, 0.4, 0.5, 0.6, 0.4], // Book 4
+        [0.5, 0.6, 0.4, 0.3, 0.2], // Book 5
+        [0.4, 0.3, 0.2, 0.1, 0.3], // Book 6
+        [0.3, 0.2, 0.1, 0.2, 0.4], // Book 7
+    ];
 
+    // 计算整体情感数据
+    const allSentimentData = sentimentData.flat();
+
+    // 获取画布宽高
     const canvasWidth = canvas.width;
     const canvasHeight = canvas.height;
-    const bookCount = sentimentData.length;
-    const segmentWidth = canvasWidth / bookCount;
 
+    // 每章宽度
+    const totalChapters = allSentimentData.length;
+    const chapterWidth = canvasWidth / totalChapters;
+
+    // 绘制整体情感趋势线
     ctx.beginPath();
-    ctx.moveTo(0, canvasHeight - sentimentData[0] * canvasHeight);
-
-    sentimentData.forEach((value, index) => {
-        const x = index * segmentWidth;
+    allSentimentData.forEach((value, index) => {
+        const x = index * chapterWidth;
         const y = canvasHeight - value * canvasHeight;
-        ctx.lineTo(x, y);
+        if (index === 0) {
+            ctx.moveTo(x, y);
+        } else {
+            ctx.lineTo(x, y);
+        }
     });
-
-    ctx.strokeStyle = "blue";
+    ctx.strokeStyle = "red";
     ctx.lineWidth = 2;
     ctx.stroke();
+
+    // 绘制每本书的情感趋势
+    let currentX = 0;
+    sentimentData.forEach((bookData, bookIndex) => {
+        const bookWidth = (bookData.length / totalChapters) * canvasWidth;
+        ctx.beginPath();
+        bookData.forEach((value, index) => {
+            const x = currentX + (index / bookData.length) * bookWidth;
+            const y = canvasHeight - value * canvasHeight;
+            if (index === 0) {
+                ctx.moveTo(x, y);
+            } else {
+                ctx.lineTo(x, y);
+            }
+        });
+        currentX += bookWidth;
+        ctx.strokeStyle = "blue";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+    });
 </script>
+
 
 </body>
 </html>
