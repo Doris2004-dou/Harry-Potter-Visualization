@@ -20,11 +20,6 @@
             overflow-x: hidden;
         }
 
-        /* 页面容器 */
-        .container {
-            padding: 20px;
-        }
-
         /* 页面标题 */
         h1 {
             text-align: center;
@@ -35,123 +30,136 @@
         }
 
         /* 书籍封面样式 */
+        .book-collection {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 30px auto;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            padding: 20px;
+        }
+
         .book-cover {
             position: relative;
-            display: inline-block;
-            margin: 15px;
-            width: 18%; /* 调整封面图片的宽度 */
+            margin: 0 10px;
             cursor: pointer;
             transition: transform 0.3s;
         }
 
         .book-cover img {
-            width: 100%;
+            width: 150px;
             height: auto;
         }
 
-        /* 鼠标悬停放大效果 */
         .book-cover:hover img {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
-        /* 书籍封面布局：第一行3本，第二行4本 */
-        .book-row {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
-        }
-
-        .book-row:nth-child(1) {
-            justify-content: space-between; /* 第一行3本书，稍微增大间距 */
-        }
-
-        /* 情感分析图 */
-        .sentiment-section {
+        /* 动态内容展示 */
+        .book-content {
             text-align: center;
-            margin-top: 50px;
+            margin-top: 20px;
+            font-size: 1rem;
+            color: white;
+            min-height: 300px;
+            padding: 20px;
+            border: 1px solid white;
+            display: none;
         }
 
-        .sentiment-section img {
-            width: 70%;
-            height: auto;
-            margin: 0 auto;
+        .visible {
+            display: block;
         }
- /* 页脚 */
+
         footer {
             color: white;
             text-align: center;
             padding: 10px;
             position: fixed;
             bottom: 0;
-            width: 50%; /* 让页脚宽度为50% */
-            left: 50%;
-            transform: translateX(-50%); /* 将页脚居中 */
+            width: 100%;
         }
 
     </style>
 </head>
 <body>
 
-<!-- 第一部分：书籍集合 -->
-<div class="container">
-    <h1>BOOK COLLECTION</h1>
+<!-- 页面标题 -->
+<h1>BOOK COLLECTION</h1>
 
-    <!-- 书籍封面展示 -->
-    <div class="book-row">
-        <div class="book-cover">
-            <a href="1.html">
-                <img src="b1.jpg" alt="Book 1 Cover">
-            </a>
-        </div>
-        <div class="book-cover">
-            <a href="2.html">
-                <img src="b2.jpg" alt="Book 2 Cover">
-            </a>
-        </div>
-        <div class="book-cover">
-            <a href="3.html">
-                <img src="b3.jpg" alt="Book 3 Cover">
-            </a>
-        </div>
+<!-- 书籍封面展示 -->
+<div class="book-collection">
+    <div class="book-cover" onmouseover="showContent(1)" onmouseout="hideContent()">
+        <img src="b1.jpg" alt="Book 1 Cover">
     </div>
-
-    <div class="book-row">
-        <div class="book-cover">
-            <a href="4.html">
-                <img src="b4.jpg" alt="Book 4 Cover">
-            </a>
-        </div>
-        <div class="book-cover">
-            <a href="5.html">
-                <img src="b5.jpg" alt="Book 5 Cover">
-            </a>
-        </div>
-        <div class="book-cover">
-            <a href="6.html">
-                <img src="b6.jpg" alt="Book 6 Cover">
-            </a>
-        </div>
-        <div class="book-cover">
-            <a href="7.html">
-                <img src="b7.jpg" alt="Book 7 Cover">
-            </a>
-        </div>
+    <div class="book-cover" onmouseover="showContent(2)" onmouseout="hideContent()">
+        <img src="b2.jpg" alt="Book 2 Cover">
+    </div>
+    <div class="book-cover" onmouseover="showContent(3)" onmouseout="hideContent()">
+        <img src="b3.jpg" alt="Book 3 Cover">
+    </div>
+    <div class="book-cover" onmouseover="showContent(4)" onmouseout="hideContent()">
+        <img src="b4.jpg" alt="Book 4 Cover">
+    </div>
+    <div class="book-cover" onmouseover="showContent(5)" onmouseout="hideContent()">
+        <img src="b5.jpg" alt="Book 5 Cover">
+    </div>
+    <div class="book-cover" onmouseover="showContent(6)" onmouseout="hideContent()">
+        <img src="b6.jpg" alt="Book 6 Cover">
+    </div>
+    <div class="book-cover" onmouseover="showContent(7)" onmouseout="hideContent()">
+        <img src="b7.jpg" alt="Book 7 Cover">
     </div>
 </div>
 
-<!-- 第二部分：情感分析 -->
-<div class="container">
-    <h1>Sentiment Analysis</h1>
-    <div class="sentiment-section">
-        <img src="s.png" alt="Sentiment Analysis">
-    </div>
+<!-- 动态展示书本内容 -->
+<div class="book-content" id="content-1">
+    <h2>Harry Potter and the Philosopher's Stone</h2>
+    <p>This is the content of book 1. Replace this with the actual content of 1.html.</p>
+</div>
+<div class="book-content" id="content-2">
+    <h2>Harry Potter and the Chamber of Secrets</h2>
+    <p>This is the content of book 2. Replace this with the actual content of 2.html.</p>
+</div>
+<div class="book-content" id="content-3">
+    <h2>Harry Potter and the Prisoner of Azkaban</h2>
+    <p>This is the content of book 3. Replace this with the actual content of 3.html.</p>
+</div>
+<div class="book-content" id="content-4">
+    <h2>Harry Potter and the Goblet of Fire</h2>
+    <p>This is the content of book 4. Replace this with the actual content of 4.html.</p>
+</div>
+<div class="book-content" id="content-5">
+    <h2>Harry Potter and the Order of the Phoenix</h2>
+    <p>This is the content of book 5. Replace this with the actual content of 5.html.</p>
+</div>
+<div class="book-content" id="content-6">
+    <h2>Harry Potter and the Half-Blood Prince</h2>
+    <p>This is the content of book 6. Replace this with the actual content of 6.html.</p>
+</div>
+<div class="book-content" id="content-7">
+    <h2>Harry Potter and the Deathly Hallows</h2>
+    <p>This is the content of book 7. Replace this with the actual content of 7.html.</p>
 </div>
 
 <!-- 页脚 -->
 <footer>
     <p>&copy; 2024 Doris</p>
 </footer>
+
+<script>
+    function showContent(bookIndex) {
+        hideContent(); // 隐藏所有内容
+        const contentElement = document.getElementById(`content-${bookIndex}`);
+        contentElement.classList.add("visible");
+    }
+
+    function hideContent() {
+        const contents = document.querySelectorAll(".book-content");
+        contents.forEach(content => content.classList.remove("visible"));
+    }
+</script>
 
 </body>
 </html>
