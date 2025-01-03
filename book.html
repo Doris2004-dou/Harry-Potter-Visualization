@@ -170,62 +170,47 @@
     const canvas = document.getElementById("sentimentCanvas");
     const ctx = canvas.getContext("2d");
 
-    // 示例情感数据，每本书的章节情感分数
+    // 示例情感数据：105 个章节的情感分数
     const sentimentData = [
-        [0.1, 0.2, 0.3, 0.4, 0.5], // Book 1
-        [0.2, 0.3, 0.1, 0.2, 0.3], // Book 2
-        [0.4, 0.5, 0.3, 0.6, 0.7], // Book 3
-        [0.3, 0.4, 0.5, 0.6, 0.4], // Book 4
-        [0.5, 0.6, 0.4, 0.3, 0.2], // Book 5
-        [0.4, 0.3, 0.2, 0.1, 0.3], // Book 6
-        [0.3, 0.2, 0.1, 0.2, 0.4], // Book 7
+        0.1, -0.2, 0.3, 0.5, -0.4, 0.2, -0.1, 0.6, 0.3, 0.1, -0.2, 0.0, 0.4, 0.2, -0.1,
+        0.3, 0.2, -0.3, 0.4, 0.5, -0.6, 0.1, 0.0, -0.4, 0.2, 0.1, -0.5, 0.6, 0.4, 0.2,
+        0.5, -0.2, 0.3, -0.1, 0.6, 0.2, -0.4, 0.3, 0.2, 0.1, -0.3, 0.0, 0.4, -0.5, 0.2,
+        -0.1, 0.3, 0.2, 0.4, -0.2, -0.1, 0.6, 0.4, 0.2, 0.1, -0.5, 0.3, -0.1, 0.6, 0.2,
+        0.1, -0.4, 0.5, 0.3, 0.2, -0.6, 0.1, 0.0, -0.4, 0.3, 0.2, 0.5, -0.1, 0.4, -0.2,
+        0.3, -0.1, 0.5, 0.6, -0.4, 0.3, -0.2, 0.0, 0.4, -0.5, 0.2, 0.3, 0.1, -0.2, 0.0,
+        0.6, 0.5, 0.4, -0.3, 0.2, 0.1, 0.5, 0.4, 0.2, -0.1, 0.3
     ];
 
-    // 计算整体情感数据
-    const allSentimentData = sentimentData.flat();
-
-    // 获取画布宽高
     const canvasWidth = canvas.width;
     const canvasHeight = canvas.height;
 
-    // 每章宽度
-    const totalChapters = allSentimentData.length;
-    const chapterWidth = canvasWidth / totalChapters;
+    const chapterCount = sentimentData.length;
+    const chapterWidth = canvasWidth / chapterCount;
 
-    // 绘制整体情感趋势线
+    // 设置纵坐标范围 (-1 到 1)
+    const yMin = -1;
+    const yMax = 1;
+
+    // 映射情感分数到画布高度
+    const mapToCanvasY = (value) => {
+        return canvasHeight - ((value - yMin) / (yMax - yMin)) * canvasHeight;
+    };
+
     ctx.beginPath();
-    allSentimentData.forEach((value, index) => {
+
+    sentimentData.forEach((value, index) => {
         const x = index * chapterWidth;
-        const y = canvasHeight - value * canvasHeight;
+        const y = mapToCanvasY(value);
         if (index === 0) {
             ctx.moveTo(x, y);
         } else {
             ctx.lineTo(x, y);
         }
     });
-    ctx.strokeStyle = "red";
+
+    ctx.strokeStyle = "blue";
     ctx.lineWidth = 2;
     ctx.stroke();
-
-    // 绘制每本书的情感趋势
-    let currentX = 0;
-    sentimentData.forEach((bookData, bookIndex) => {
-        const bookWidth = (bookData.length / totalChapters) * canvasWidth;
-        ctx.beginPath();
-        bookData.forEach((value, index) => {
-            const x = currentX + (index / bookData.length) * bookWidth;
-            const y = canvasHeight - value * canvasHeight;
-            if (index === 0) {
-                ctx.moveTo(x, y);
-            } else {
-                ctx.lineTo(x, y);
-            }
-        });
-        currentX += bookWidth;
-        ctx.strokeStyle = "blue";
-        ctx.lineWidth = 2;
-        ctx.stroke();
-    });
 </script>
 
 
