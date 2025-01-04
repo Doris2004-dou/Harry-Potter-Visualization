@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sentiment Analysis</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <style>
         /* 引入自定义字体 */
         @font-face {
@@ -43,14 +42,14 @@
             margin: 20px auto;
             text-align: center;
             position: relative;
-            width: 1050px;
+            width: 1050px; /* 七本书封面宽度总和 */
             height: 500px;
         }
 
         canvas {
             display: block;
             margin: 0 auto;
-            background-color: transparent; 
+            background-color: transparent; /* 设置背景透明 */
         }
 
         footer {
@@ -99,38 +98,46 @@
     <p>&copy; 2025 Your Name</p>
 </footer>
 
+<!-- 引入SheetJS库 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.3/xlsx.full.min.js"></script>
+
 <script>
-    // 读取 Excel 文件
+    const canvas = document.getElementById("sentimentCanvas");
+    const ctx = canvas.getContext("2d");
+
+    // 读取Excel文件
     function readExcel(file) {
         const reader = new FileReader();
-        reader.onload = function (e) {
-            const data = e.target.result;
-            const workbook = XLSX.read(data, { type: "binary" });
-
-            // 假设数据在第一个工作表中
+        reader.onload = function(event) {
+            const data = event.target.result;
+            const workbook = XLSX.read(data, { type: 'binary' });
             const sheet = workbook.Sheets[workbook.SheetNames[0]];
-            const json = XLSX.utils.sheet_to_json(sheet);
-            
-            const chapterNumbers = json.map(row => row['Chapter Number']);
-            const sentimentScores = json.map(row => row['Sentiment Score']);
-            drawChart(chapterNumbers, sentimentScores);
+            const jsonData = XLSX.utils.sheet_to_json(sheet);
+
+            // 提取章节号和情感分数
+            const chapters = jsonData.map(row => row["Chapter Number"]);
+            const sentimentScores = jsonData.map(row => row["Sentiment Score"]);
+
+            // 使用这些数据绘制图表
+            drawSentimentChart(chapters, sentimentScores);
         };
         reader.readAsBinaryString(file);
     }
 
-    // 绘制情感趋势图
-    function drawChart(chapterNumbers, sentimentScores) {
-        const canvas = document.getElementById("sentimentCanvas");
-        const ctx = canvas.getContext("2d");
+    // 加载并解析Excel文件
+    document.querySelector("input[type='file']").addEventListener("change", function(e) {
+        const file = e.target.files[0];
+        readExcel(file);
+    });
 
-        const chapters = chapterNumbers.length;
-        const xStart = 50;
-        const xEnd = canvas.width - 50;
-        const yMiddle = canvas.height / 2;
+    // 绘制情感分析图表
+    function drawSentimentChart(chapters, sentimentScores) {
         const axisPadding = 50;
-        const chapterWidth = (xEnd - xStart) / chapters;
+        const xStart = axisPadding;
+        const xEnd = canvas.width - axisPadding;
+        const yMiddle = canvas.height / 2;
 
-        // 坐标轴设置
+        // 添加横轴
         ctx.strokeStyle = "white";
         ctx.lineWidth = 1;
         ctx.beginPath();
@@ -138,30 +145,28 @@
         ctx.lineTo(xEnd, yMiddle);
         ctx.stroke();
 
-        // 绘制横轴章节刻度
+        // 添加横轴章节刻度
         ctx.fillStyle = "white";
         ctx.font = "12px Arial";
-        chapterNumbers.forEach((chapter, index) => {
-            const x = xStart + index * chapterWidth;
-            if (index % 10 === 0) {
-                ctx.fillText(chapter.toString(), x - 10, yMiddle + 15);
-            }
-        });
+        for (let i = 0; i < chapters.length; i += Math.max(1, Math.floor(chapters.length / 10))) {
+            const x = xStart + (i * (canvas.width - 2 * axisPadding)) / chapters.length;
+            ctx.fillText(chapters[i], x - 10, yMiddle + 15);
+        }
 
-        // 绘制纵轴情感分数刻度
+        // 添加纵轴情感分数刻度
         const polarityScores = [-1, -0.5, 0, 0.5, 1];
-        polarityScores.forEach(score => {
+        for (let score of polarityScores) {
             const y = yMiddle - score * (yMiddle - axisPadding);
             ctx.fillText(score.toFixed(1), xStart - 30, y + 5);
-        });
+        }
 
         // 绘制情感趋势线
         ctx.beginPath();
         ctx.strokeStyle = "white";
         ctx.lineWidth = 2;
-        sentimentScores.forEach((score, index) => {
-            const x = xStart + index * chapterWidth;
-            const y = yMiddle - score * (yMiddle - axisPadding);
+        sentimentScores.forEach((value, index) => {
+            const x = xStart + index * (canvas.width - 2 * axisPadding) / chapters.length;
+            const y = yMiddle - value * (yMiddle - axisPadding);
             if (index === 0) {
                 ctx.moveTo(x, y);
             } else {
@@ -170,20 +175,6 @@
         });
         ctx.stroke();
     }
-
-    // 上传 Excel 文件
-    document.addEventListener('DOMContentLoaded', () => {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = '.xlsx';
-        input.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                readExcel(file);
-            }
-        });
-        document.body.appendChild(input);
-    });
 </script>
 
 </body>
