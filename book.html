@@ -5,44 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harry Potter Book Collection</title>
     <style>
-        /* 引入自定义字体 */
         @font-face {
             font-family: "Harry Potter";
             src: url("hp.ttf") format("truetype");
         }
 
         body {
-            background-color: white;
-            color: black;
+            background-color: black;
+            color: white;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
         }
 
-        /* 页面标题 */
         h1 {
             text-align: center;
             font-family: "Harry Potter", sans-serif;
             font-size: 4rem;
-            color: black;
             margin-bottom: 30px;
         }
 
-        /* 书籍封面样式 */
         .book-collection {
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 0 auto;
             flex-wrap: nowrap;
-            overflow-x: auto;
-            padding: 20px;
-        }
-
-        .book-cover {
-            margin: 0;
-            flex: 1 1 auto;
         }
 
         .book-cover img {
@@ -50,27 +38,11 @@
             height: auto;
         }
 
-        /* 动态内容展示 */
-        .book-content {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 1rem;
-            color: black;
-            min-height: 300px;
-            padding: 20px;
-            border: 1px solid black;
-            display: none;
-        }
-
-        .visible {
-            display: block;
-        }
-
         .trend-line {
             margin: 20px auto;
             text-align: center;
             position: relative;
-            width: calc(150px * 7); /* 七本书封面宽度总和 */
+            width: 1050px; /* 7 * 150px */
             height: 400px;
             background-color: black;
             border-radius: 10px;
@@ -82,22 +54,19 @@
         }
 
         footer {
-            color: black;
+            color: white;
             text-align: center;
             padding: 10px;
             position: fixed;
             bottom: 0;
             width: 100%;
         }
-
     </style>
 </head>
 <body>
 
-<!-- 页面标题 -->
 <h1>BOOK COLLECTION</h1>
 
-<!-- 书籍封面展示 -->
 <div class="book-collection">
     <div class="book-cover">
         <img src="b1.jpg" alt="Book 1 Cover">
@@ -122,41 +91,38 @@
     </div>
 </div>
 
-<!-- 情感趋势折线图 -->
 <div class="trend-line">
-    <canvas id="sentimentCanvas" width="1050" height="400"></canvas> <!-- 宽度为 7 * 150px -->
+    <canvas id="sentimentCanvas" width="1050" height="400"></canvas>
 </div>
 
-<!-- 页脚 -->
 <footer>
     <p>&copy; 2024 Doris</p>
 </footer>
 
 <script>
-    // 绘制情感趋势折线图
     const canvas = document.getElementById("sentimentCanvas");
     const ctx = canvas.getContext("2d");
 
-    const sentimentData = [
-        0.2, 0.4, 0.6, 0.5, 0.7, 0.3, 0.5
-    ]; // 示例数据，每本书对应一个情感得分
+    // 假设情感分数数据
+    const sentimentData = Array.from({ length: 105 }, () => Math.random() * 2 - 1); // 随机生成 -1 到 1 的情感分数
 
     const canvasWidth = canvas.width;
     const canvasHeight = canvas.height;
-    const bookCount = sentimentData.length;
-    const segmentWidth = canvasWidth / bookCount;
+    const chaptersPerBook = 15; // 每本书 15 章
+    const bookCount = 7;
+    const chapterWidth = canvasWidth / (chaptersPerBook * bookCount);
 
-    // 设置背景色为黑色
+    // 设置背景
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
     // 绘制折线
     ctx.beginPath();
-    ctx.moveTo(0, canvasHeight - sentimentData[0] * canvasHeight);
+    ctx.moveTo(0, canvasHeight / 2 - sentimentData[0] * canvasHeight / 2);
 
     sentimentData.forEach((value, index) => {
-        const x = index * segmentWidth + segmentWidth / 2;
-        const y = canvasHeight - value * canvasHeight;
+        const x = index * chapterWidth;
+        const y = canvasHeight / 2 - value * canvasHeight / 2;
         ctx.lineTo(x, y);
     });
 
