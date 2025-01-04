@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sentiment Analysis</title>
+    <title>Harry Potter Book Collection</title>
     <style>
         /* 引入自定义字体 */
         @font-face {
@@ -17,147 +17,141 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
         }
 
+        /* 页面容器 */
+        .container {
+            padding: 20px;
+        }
+
+        /* 页面标题 */
         h1 {
             text-align: center;
             font-family: "Harry Potter", sans-serif;
             font-size: 4rem;
-            margin-bottom: 20px;
+            color: white;
+            margin-bottom: 30px;
         }
 
-        .book-collection {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
+        /* 书籍封面样式 */
+        .book-cover {
+            position: relative;
+            display: inline-block;
+            margin: 15px;
+            width: 18%; /* 调整封面图片的宽度 */
+            cursor: pointer;
+            transition: transform 0.3s;
         }
 
         .book-cover img {
-            width: 150px;
+            width: 100%;
             height: auto;
-            margin: 0;
         }
 
-        .trend-line {
-            margin: 20px auto;
+        /* 鼠标悬停放大效果 */
+        .book-cover:hover img {
+            transform: scale(1.05);
+        }
+
+        /* 书籍封面布局：第一行3本，第二行4本 */
+        .book-row {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .book-row:nth-child(1) {
+            justify-content: space-between; /* 第一行3本书，稍微增大间距 */
+        }
+
+        /* 情感分析图 */
+        .sentiment-section {
             text-align: center;
-            position: relative;
-            width: 1050px; /* 七本书封面宽度总和 */
-            height: 500px;
+            margin-top: 50px;
         }
 
-        canvas {
-            display: block;
+        .sentiment-section img {
+            width: 70%;
+            height: auto;
             margin: 0 auto;
-            background-color: transparent; /* 设置背景透明 */
         }
-
+ /* 页脚 */
         footer {
             color: white;
             text-align: center;
             padding: 10px;
             position: fixed;
             bottom: 0;
-            width: 100%;
+            width: 50%; /* 让页脚宽度为50% */
+            left: 50%;
+            transform: translateX(-50%); /* 将页脚居中 */
         }
+
     </style>
 </head>
 <body>
 
-<h1>SENTIMENT ANALYSIS</h1>
+<!-- 第一部分：书籍集合 -->
+<div class="container">
+    <h1>BOOK COLLECTION</h1>
 
-<div class="book-collection">
-    <div class="book-cover">
-        <img src="b1.jpg" alt="Book 1 Cover">
+    <!-- 书籍封面展示 -->
+    <div class="book-row">
+        <div class="book-cover">
+            <a href="1.html">
+                <img src="b1.jpg" alt="Book 1 Cover">
+            </a>
+        </div>
+        <div class="book-cover">
+            <a href="2.html">
+                <img src="b2.jpg" alt="Book 2 Cover">
+            </a>
+        </div>
+        <div class="book-cover">
+            <a href="3.html">
+                <img src="b3.jpg" alt="Book 3 Cover">
+            </a>
+        </div>
     </div>
-    <div class="book-cover">
-        <img src="b2.jpg" alt="Book 2 Cover">
-    </div>
-    <div class="book-cover">
-        <img src="b3.jpg" alt="Book 3 Cover">
-    </div>
-    <div class="book-cover">
-        <img src="b4.jpg" alt="Book 4 Cover">
-    </div>
-    <div class="book-cover">
-        <img src="b5.jpg" alt="Book 5 Cover">
-    </div>
-    <div class="book-cover">
-        <img src="b6.jpg" alt="Book 6 Cover">
-    </div>
-    <div class="book-cover">
-        <img src="b7.jpg" alt="Book 7 Cover">
+
+    <div class="book-row">
+        <div class="book-cover">
+            <a href="4.html">
+                <img src="b4.jpg" alt="Book 4 Cover">
+            </a>
+        </div>
+        <div class="book-cover">
+            <a href="5.html">
+                <img src="b5.jpg" alt="Book 5 Cover">
+            </a>
+        </div>
+        <div class="book-cover">
+            <a href="6.html">
+                <img src="b6.jpg" alt="Book 6 Cover">
+            </a>
+        </div>
+        <div class="book-cover">
+            <a href="7.html">
+                <img src="b7.jpg" alt="Book 7 Cover">
+            </a>
+        </div>
     </div>
 </div>
 
-<div class="trend-line">
-    <canvas id="sentimentCanvas" width="1050" height="500"></canvas>
+<!-- 第二部分：情感分析 -->
+<div class="container">
+    <h1>Sentiment Analysis</h1>
+    <div class="sentiment-section">
+        <img src="s.png" alt="Sentiment Analysis">
+    </div>
 </div>
 
+<!-- 页脚 -->
 <footer>
-    <p>&copy; 2025 Your Name</p>
+    <p>&copy; 2024 Doris</p>
 </footer>
 
-<script>
-    const canvas = document.getElementById("sentimentCanvas");
-    const ctx = canvas.getContext("2d");
-
-    const sentimentData = [
-       0.0506101178640549, 0.017329238544621, -0.0175202621452622, 0.0355237130440619, 0.103830041085814, 0.0501177579419921, 0.0705644134416375, 0.0207570139332434, 0.0443304849299611, 0.0688050093057195, 0.0444489261776922, 0.0711905779205129, 0.0455961641630901, 0.041921959871655, 0.0166313101072716, 0.0482471682100624, 0.0670592058480131, 0.107235897716743, -0.0171113847837986, 0.0571383663494355, 0.086412744703674, 0.0348150007619297, 0.0830290829419119, 0.064810781913846, 0.0793809451659452, 0.0473013731871645, -0.000146473031251958, 0.0258223555361859, 0.041276864357075, 0.0311684574854784, 0.00938216080059301, 0.0186004677744019, 0.0296675491747346, 0.0413218961371517, 0.0944593744785072, 0.0968694263093677, 0.0233856954360003, 0.0337532588176476, 0.0748826109169308, 0.0249775370576187, 0.0615653683557559, 0.0452861464519883, 0.0705881073652615, -0.00692453625458762, 0.000843719951400679, 0.037917474687062, 0.0736653335719232, 0.0876551681636452, 0.0146062783562783, 0.0219643700215893, 0.0141906653338945, -0.0629707191846616, -0.0127913317662521, 0.00412538101981559, 0.0147844727032227, 0.0348030286328897, 0.0907450845220806, 0.00328546570143209, 0.0417277781320334, 0.0627108392040299, 0.0525182988441659, 0.0696886113965855, 0.0995099905659301, 0.0868783864365071, 0.00507927047852555, 0.0460647598928849, 0.0697890897612488, 0.0953202399271736, 0.0457648959801528, 0.0711152722415099, 0.08149263209136, 0.0977140787574999, 0.0853592402753283, 0.0668806295330686, 0.0173372874170746, 0.099071296165151, 0.0419006878876727, 0.0406050621005978, 0.0911989542141237, 0.0363092369729845, 0.0275585874230645, 0.0323440334370828, 0.0346147108981334, 0.00666941982742449, 0.0466274684677462, 0.0398527157636303, 0.06514412932289, -0.0499180021367521, 0.0578551537883729, 0.084542221405429, 0.00378045083774249, 0.0448022273425499, 0.0761730804385791, 0.0289113024164236, 0.00325238000980279, 0.0550118376222543, 0.0173968313107657, 0.0768955560090071, 0.035631026357817, 0.0509379617937075, 0.0878364088545814, 0.0510948178266695, 0.0290523747881833, 0.101905980861244, 0.037569184478003, 0.0264951582145357, 0.0533446491270052, 0.0522240109468251, 0.0770747015330349, -0.00391372312727499, 0.05255186298725, 0.0193568838857461, 0.0178123948677363, 0.0209456962216271, 0.0236947882392478, 0.0564382553015973, 0.0181581644365735, 0.0267573284699908, 0.031811804996992, 0.0291117206241761, 0.0529803787650958, 0.0444216529025575, 0.0174139776087723, 0.030745027692282, 0.032176711748079, 0.0323821633684019, 0.0290507910961238, -0.00445302337438515, 0.00352637235449736, 0.0589694462186266, 0.042148915184704, 0.0327069677738282, 0.0151631395519976, 0.0575002332887087, 0.0715212427281818, 0.0718325787399063, 0.0930652071741611, 0.0554841328640872, 0.0914406303389983, 0.117316406842185, 0.0188630283284209, 0.0470355255598311, 0.0687117026400984, 0.0979797614172615, 0.0599612919448725, 0.0574750322726036, 0.106668296827312, 0.106604021912916, 0.0462902106796338, 0.0428293947300796, 0.105680528697661, 0.0476046359271528, 0.0787554997484539, 0.0852494793901044, 0.0245075106923805, 0.0398607168484218, 0.0485763701707098, 0.0163924132466792, -0.037723486727393, 0.00786324034761534, 0.0459549647627254, 0.0598870877702994, 0.0782742849312617, 0.0967652224824355, 0.0661314030356508, 0.0220179073458014, 0.0614676075064259, 0.0829097501152914, 0.11858619463516, 0.00940787488533771, 0.0470949260853108, 0.0825488244817514, 0.0346589203900012, 0.0130744277423965, 0.000175115934692546, 0.0412502875287529, 0.0404055890798316, -0.0127815381052255, 0.0604564772504587, 0.0242474178369322, 0.0594233140081233, 0.031504083038174, 0.0691921777595412, 0.0133315147864304, 0.0388783376740694, 0.0467736082342574, 0.0299875111963266, 0.0134901023241831, 0.0812864588183927, 0.0620433755278464, 0.0517043320976977, 0.0210596645921854, 0.0366958350772254, 0.0290352085703648, 0.076497409694131, 0.0965903334754449, 0.0746300204186992
-    ];
-
-   
-    const books = 7;
-    const bookWidth = canvas.width / books;
-    
-
-    // 坐标轴设置
-    const axisPadding = 50;
-    const xStart = axisPadding;
-    const xEnd = canvas.width - axisPadding;
-    const yMiddle = canvas.height / 2;
-
-    // 添加横轴
-    ctx.strokeStyle = "white";
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(xStart, yMiddle);
-    ctx.lineTo(xEnd, yMiddle);
-    ctx.stroke();
-
-    // 添加横轴章节刻度
-    ctx.fillStyle = "white";
-    ctx.font = "12px Arial";
-    for (let i = 0; i <= chapters; i += 15) {
-        const x = xStart + i * chapterWidth;
-        ctx.fillText(i.toString(), x - 10, yMiddle + 15);
-    }
-
-    // 添加纵轴情感分数刻度
-    const polarityScores = [-0.2, -0.15, -0.1, -0.05, 0, 0.05, 0.1, 0.15, 0.2];
-    for (let score of polarityScores) {
-        const y = yMiddle - score * (yMiddle - axisPadding) / 0.2;
-        ctx.fillText(score.toFixed(2), xStart - 30, y + 5);
-    }
-
-    // 绘制情感趋势线
-    ctx.beginPath();
-    ctx.strokeStyle = "white";
-    ctx.lineWidth = 2;
-    sentimentData.forEach((value, index) => {
-        const x = xStart + index * chapterWidth;
-        const y = yMiddle - value * (yMiddle - axisPadding) / 0.2;
-        if (index === 0) {
-            ctx.moveTo(x, y);
-        } else {
-            ctx.lineTo(x, y);
-        }
-    });
-    ctx.stroke();
-</script>
-
-
-</body>
-</html>
 </body>
 </html>
