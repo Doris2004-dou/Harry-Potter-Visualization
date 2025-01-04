@@ -49,8 +49,7 @@
         canvas {
             display: block;
             margin: 0 auto;
-            background-color: black;
-            border: 1px solid white;
+            background-color: transparent; /* 设置背景透明 */
         }
 
         footer {
@@ -96,7 +95,7 @@
 </div>
 
 <footer>
-    <p>&copy; 2025 Doris</p>
+    <p>&copy; 2025 Your Name</p>
 </footer>
 
 <script>
@@ -113,29 +112,18 @@
     const bookWidth = canvas.width / books;
     const chapterWidth = canvas.width / chapters;
 
-    // 设置背景
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
     // 坐标轴设置
     const axisPadding = 50;
     const xStart = axisPadding;
     const xEnd = canvas.width - axisPadding;
-    const yStart = canvas.height - axisPadding;
-    const yEnd = axisPadding;
+    const yMiddle = canvas.height / 2;
 
-    // 画横轴
+    // 添加横轴
     ctx.strokeStyle = "white";
     ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.moveTo(xStart, yStart);
-    ctx.lineTo(xEnd, yStart);
-    ctx.stroke();
-
-    // 画纵轴
-    ctx.beginPath();
-    ctx.moveTo(xStart, yStart);
-    ctx.lineTo(xStart, yEnd);
+    ctx.moveTo(xStart, yMiddle);
+    ctx.lineTo(xEnd, yMiddle);
     ctx.stroke();
 
     // 添加横轴章节刻度
@@ -143,13 +131,13 @@
     ctx.font = "12px Arial";
     for (let i = 0; i <= chapters; i += 15) {
         const x = xStart + i * chapterWidth;
-        ctx.fillText(i.toString(), x - 10, yStart + 15);
+        ctx.fillText(i.toString(), x - 10, yMiddle + 15);
     }
 
     // 添加纵轴情感分数刻度
     const polarityScores = [-1, -0.5, 0, 0.5, 1];
     for (let score of polarityScores) {
-        const y = yStart - ((score + 1) / 2) * (yStart - yEnd);
+        const y = yMiddle - score * (yMiddle - axisPadding);
         ctx.fillText(score.toFixed(1), xStart - 30, y + 5);
     }
 
@@ -159,7 +147,7 @@
     ctx.lineWidth = 2;
     sentimentData.forEach((value, index) => {
         const x = xStart + index * chapterWidth;
-        const y = yStart - ((value + 1) / 2) * (yStart - yEnd);
+        const y = yMiddle - value * (yMiddle - axisPadding);
         if (index === 0) {
             ctx.moveTo(x, y);
         } else {
